@@ -24,12 +24,10 @@ func init() {
 }
 
 func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerChan chan *github.Runner) {
-	// sort.Slice(runnerList, func(i, j int) bool { return runnerList[i].GetID() < runnerList[j].GetID() })
-
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
+	twOut := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0) //nolint:gomnd
 
 	if !strings.Contains(tmpl.Root.String(), "json") && strings.Contains(tmpl.Root.String(), "\t") && !forceDisableHeader {
-		if err := tmpl.Execute(w, map[string]interface{}{
+		if err := tmpl.Execute(twOut, map[string]interface{}{
 			"ID":     "ID",
 			"Name":   "Name",
 			"OS":     "OS",
@@ -42,10 +40,10 @@ func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerCha
 	}
 
 	for in := range runnerChan {
-		if err := tmpl.Execute(w, in); err != nil {
+		if err := tmpl.Execute(twOut, in); err != nil {
 			log.Printf("error displaying host: %s", err.Error())
 		}
 	}
 
-	_ = w.Flush()
+	_ = twOut.Flush()
 }

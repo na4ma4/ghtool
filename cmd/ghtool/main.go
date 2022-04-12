@@ -37,22 +37,25 @@ func getGithubClient(ctx context.Context, cfg config.Conf) (*github.Client, erro
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: cfg.GetString("github.token")},
 	)
-	tc := oauth2.NewClient(ctx, ts)
+	tkc := oauth2.NewClient(ctx, ts)
 
-	// client := github.NewClient(tc)
 	client, err := github.NewEnterpriseClient(
 		cfg.GetString("github.url"),
 		cfg.GetString("github.url"),
-		tc,
+		tkc,
 	)
+	if err != nil {
+		return client, fmt.Errorf("unable to create github API client: %w", err)
+	}
 
-	return client, err
+	return client, nil
 }
 
 var errConfigMissing = errors.New("config key missing")
 
 func checkConfig(cfg config.Conf, keys ...string) error {
 	missing := []string{}
+
 	for _, key := range keys {
 		if cfg.GetString(key) == "" {
 			missing = append(missing, key)
@@ -76,6 +79,9 @@ func getTemplateFromConfig(format string, extraFunc ...template.FuncMap) (*templ
 	}
 
 	tmpl, err := template.New("").Funcs(basicFunctions(extraFunc...)).Parse(format)
+	if err != nil {
+		return tmpl, fmt.Errorf("unable to create template: %w", err)
+	}
 
-	return tmpl, err
+	return tmpl, nil
 }

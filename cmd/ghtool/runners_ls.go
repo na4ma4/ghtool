@@ -36,7 +36,6 @@ func init() {
 
 	_ = viper.BindPFlag("runner.list.raw", cmdRunnersList.PersistentFlags().Lookup("raw"))
 	_ = viper.BindPFlag("runner.list.format", cmdRunnersList.PersistentFlags().Lookup("format"))
-
 }
 
 func runnerListCommand(cmd *cobra.Command, args []string) error {
@@ -75,16 +74,18 @@ func runnerListCommand(cmd *cobra.Command, args []string) error {
 }
 
 func listEnterpriseRunners(ctx context.Context, client *github.Client, enterprise string) chan *github.Runner {
-	runnerChan := make(chan *github.Runner, 3)
+	runnerChan := make(chan *github.Runner)
 
 	go func() {
 		defer close(runnerChan)
-		opts := &github.ListOptions{PerPage: 3}
+
+		opts := &github.ListOptions{}
 
 		for {
 			runners, resp, err := client.Enterprise.ListRunners(ctx, enterprise, opts)
 			if err != nil {
 				logrus.Errorf("unable to get org runners: %s", err)
+
 				return
 			}
 
@@ -102,11 +103,11 @@ func listEnterpriseRunners(ctx context.Context, client *github.Client, enterpris
 	return runnerChan
 }
 
-func templateLabels(in interface{}) string {
-	switch v := in.(type) {
+func templateLabels(labels interface{}) string {
+	switch typedLabels := labels.(type) {
 	case []*github.RunnerLabels:
-		o := []string{}
-		for _, label := range v {
+		out := []string{}
+		for _, label := range typedLabels {
 			// switch label.GetType() {
 			// case "read-only":
 			// 	// built-in default labels
@@ -115,11 +116,11 @@ func templateLabels(in interface{}) string {
 			// 	// custom labels
 			// 	o = append(o, fmt.Sprintf("%s [%d]", label.GetName(), label.GetID()))
 			// }
-			o = append(o, label.GetName())
+			out = append(out, label.GetName())
 		}
 
-		return strings.Join(o, ", ")
+		return strings.Join(out, ", ")
 	default:
-		return fmt.Sprintf("%s", in)
+		return fmt.Sprintf("%s", typedLabels)
 	}
 }

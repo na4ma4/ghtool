@@ -16,12 +16,12 @@ import (
 
 // basicFunctions are the set of initial functions provided to every template.
 func basicFunctions(extra ...template.FuncMap) template.FuncMap {
-	o := template.FuncMap{
+	basicFuncMap := template.FuncMap{
 		"json": func(v interface{}) string {
 			buf := &bytes.Buffer{}
 			enc := json.NewEncoder(buf)
 			enc.SetEscapeHTML(false)
-			_ = enc.Encode(v)
+			_ = enc.Encode(v) //nolint:errchkjson // templating function
 			// Remove the trailing new line added by the encoder
 			return strings.TrimSpace(buf.String())
 		},
@@ -45,12 +45,12 @@ func basicFunctions(extra ...template.FuncMap) template.FuncMap {
 	if len(extra) > 0 {
 		for _, add := range extra {
 			for k, v := range add {
-				o[k] = v
+				basicFuncMap[k] = v
 			}
 		}
 	}
 
-	return o
+	return basicFuncMap
 }
 
 // padToLength adds whitespace to pad to the supplied length.
@@ -76,15 +76,15 @@ func padWithSpace(source interface{}, prefix, suffix int) string {
 
 // humanAgeFormat returns a duration in a human readable format.
 func humanAgeFormat(source interface{}) string {
-	switch s := source.(type) {
+	switch src := source.(type) {
 	case time.Time:
-		return ts.LongProcess.Option(ts.Abbreviated, ts.ShowMSOnSeconds).String(time.Since(s))
+		return ts.LongProcess.Option(ts.Abbreviated, ts.ShowMSOnSeconds).String(time.Since(src))
 	case timestamppb.Timestamp:
-		return ts.LongProcess.Option(ts.Abbreviated, ts.ShowMSOnSeconds).String(time.Since(s.AsTime()))
+		return ts.LongProcess.Option(ts.Abbreviated, ts.ShowMSOnSeconds).String(time.Since(src.AsTime()))
 	case *timestamppb.Timestamp:
-		return ts.LongProcess.Option(ts.Abbreviated, ts.ShowMSOnSeconds).String(time.Since(s.AsTime()))
+		return ts.LongProcess.Option(ts.Abbreviated, ts.ShowMSOnSeconds).String(time.Since(src.AsTime()))
 	default:
-		return fmt.Sprintf("%s", source)
+		return fmt.Sprintf("%s", src)
 	}
 }
 
@@ -105,46 +105,46 @@ func humanAgeFormat(source interface{}) string {
 
 // timeFormat returns time in RFC3339 format.
 func timeFormat(source interface{}) string {
-	switch s := source.(type) {
+	switch src := source.(type) {
 	case time.Time:
-		return s.Format(time.RFC3339)
+		return src.Format(time.RFC3339)
 	case timestamppb.Timestamp:
-		return s.AsTime().Format(time.RFC3339)
+		return src.AsTime().Format(time.RFC3339)
 	case *timestamppb.Timestamp:
-		return s.AsTime().Format(time.RFC3339)
+		return src.AsTime().Format(time.RFC3339)
 	default:
-		return fmt.Sprintf("%s", source)
+		return fmt.Sprintf("%s", src)
 	}
 }
 
 // dateFormat returns date in YYYY-MM-DD format.
 func dateFormat(source interface{}) string {
-	switch s := source.(type) {
+	switch src := source.(type) {
 	case time.Time:
-		return s.Format("2006-01-02")
+		return src.Format("2006-01-02")
 	case timestamppb.Timestamp:
-		return s.AsTime().Format("2006-01-02")
+		return src.AsTime().Format("2006-01-02")
 	case *timestamppb.Timestamp:
-		return s.AsTime().Format("2006-01-02")
+		return src.AsTime().Format("2006-01-02")
 	default:
-		return fmt.Sprintf("%q", source)
+		return fmt.Sprintf("%q", src)
 	}
 }
 
-func stringBool(source interface{}, yes, no string) string {
+func stringBool(source interface{}, trueString, falseString string) string {
 	switch val := source.(type) {
 	case *bool:
 		if val != nil {
-			return stringBool(*val, yes, no)
+			return stringBool(*val, trueString, falseString)
 		}
 
 		return "nil"
 	case bool:
 		if val {
-			return yes
+			return trueString
 		}
 
-		return no
+		return falseString
 	default:
 		return fmt.Sprintf("%s", val)
 	}
