@@ -1,0 +1,5 @@
+linters:
+  enable-all: true
+  exclude-use-default: false
+  disable:
+  - exhaustivestruct
