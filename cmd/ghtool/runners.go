@@ -35,7 +35,7 @@ func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerCha
 			"Busy":   "Busy",
 			"Labels": "Labels",
 		}); err != nil {
-			log.Printf("error pparsing template: %s", err.Error())
+			log.Printf("error parsing template: %s", err.Error())
 		}
 	}
 
