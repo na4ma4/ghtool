@@ -2,4 +2,6 @@ linters:
   enable-all: true
   exclude-use-default: false
   disable:
+  - execinquery
+  - exhaustruct
   - exhaustivestruct
