@@ -55,12 +55,42 @@ func basicFunctions(extra ...template.FuncMap) template.FuncMap {
 
 // padToLength adds whitespace to pad to the supplied length.
 func padToMaxLength(source interface{}) string {
-	return fmt.Sprintf(fmt.Sprintf("%%-%ds", 0), source)
+	switch val := source.(type) {
+	case *string:
+		return padToLength(*val, 0)
+	case *int:
+		return padToLength(fmt.Sprintf("%d", *val), 0)
+	case *int8:
+		return padToLength(fmt.Sprintf("%d", *val), 0)
+	case *int16:
+		return padToLength(fmt.Sprintf("%d", *val), 0)
+	case *int32:
+		return padToLength(fmt.Sprintf("%d", *val), 0)
+	case *int64:
+		return padToLength(fmt.Sprintf("%d", *val), 0)
+	default:
+		return padToLength(source, 0)
+	}
 }
 
 // padToLength adds whitespace to pad to the supplied length.
 func padToLength(source interface{}, prefix int) string {
-	return fmt.Sprintf(fmt.Sprintf("%%-%ds", prefix), source)
+	switch val := source.(type) {
+	case *string:
+		return padToLength(*val, prefix)
+	case *int:
+		return padToLength(fmt.Sprintf("%d", *val), prefix)
+	case *int8:
+		return padToLength(fmt.Sprintf("%d", *val), prefix)
+	case *int16:
+		return padToLength(fmt.Sprintf("%d", *val), prefix)
+	case *int32:
+		return padToLength(fmt.Sprintf("%d", *val), prefix)
+	case *int64:
+		return padToLength(fmt.Sprintf("%d", *val), prefix)
+	default:
+		return fmt.Sprintf(fmt.Sprintf("%%-%ds", prefix), source)
+	}
 }
 
 // padWithSpace adds whitespace to the input if the input is non-empty.

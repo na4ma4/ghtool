@@ -43,7 +43,15 @@ func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerCha
 		if err := tmpl.Execute(twOut, in); err != nil {
 			log.Printf("error displaying host: %s", err.Error())
 		}
-	}
 
-	_ = twOut.Flush()
+		_ = twOut.Flush()
+	}
+}
+
+func simplePrintRunnerList(tmpl *template.Template, runnerChan chan *github.Runner) {
+	for in := range runnerChan {
+		if err := tmpl.Execute(os.Stdout, in); err != nil {
+			log.Printf("error displaying host: %s", err.Error())
+		}
+	}
 }
