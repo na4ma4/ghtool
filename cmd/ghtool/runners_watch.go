@@ -46,7 +46,7 @@ func init() {
 	_ = viper.BindPFlag("runner.watch.tick", cmdRunnersWatch.PersistentFlags().Lookup("tick"))
 }
 
-func runnerWatchCommand(cmd *cobra.Command, args []string) error {
+func runnerWatchCommand(_ *cobra.Command, _ []string) error {
 	cfg := config.NewViperConfigFromViper(viper.GetViper(), "ghtool")
 
 	if err := checkConfig(

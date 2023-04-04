@@ -52,7 +52,7 @@ func (r *Runners) Channel() chan *github.Runner {
 	return r.outChan
 }
 
-//nolint:varnamelen
+//nolint:varnamelen // a/b makes sense for comparisons.
 func compareRunners(a, b *github.Runner) bool {
 	if a.GetID() != b.GetID() {
 		return false

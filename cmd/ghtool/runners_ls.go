@@ -38,7 +38,7 @@ func init() {
 	_ = viper.BindPFlag("runner.list.format", cmdRunnersList.PersistentFlags().Lookup("format"))
 }
 
-func runnerListCommand(cmd *cobra.Command, args []string) error {
+func runnerListCommand(_ *cobra.Command, _ []string) error {
 	cfg := config.NewViperConfigFromViper(viper.GetViper(), "ghtool")
 
 	if err := checkConfig(
