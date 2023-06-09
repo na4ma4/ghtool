@@ -3,7 +3,7 @@ module github.com/na4ma4/ghtool
 go 1.20
 
 require (
-	github.com/google/go-github/v43 v43.0.0
+	github.com/google/go-github/v53 v53.0.0
 	github.com/na4ma4/config v1.0.1
 	github.com/na4ma4/go-timestring v0.3.0
 	github.com/sirupsen/logrus v1.9.3
@@ -15,6 +15,8 @@ require (
 )
 
 require (
+	github.com/ProtonMail/go-crypto v0.0.0-20230528122434-6f98819771a1 // indirect
+	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
@@ -29,7 +31,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
-	go.uber.org/atomic v1.10.0 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
 	golang.org/x/crypto v0.9.0 // indirect

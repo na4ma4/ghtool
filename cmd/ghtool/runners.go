@@ -7,7 +7,7 @@ import (
 	"text/tabwriter"
 	"text/template"
 
-	"github.com/google/go-github/v43/github"
+	"github.com/google/go-github/v53/github"
 	"github.com/spf13/cobra"
 )
 

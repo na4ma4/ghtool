@@ -7,7 +7,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v43/github"
+	"github.com/google/go-github/v53/github"
 	"github.com/na4ma4/config"
 	"github.com/na4ma4/ghtool/internal/mainconfig"
 	"github.com/spf13/cobra"
