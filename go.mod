@@ -3,7 +3,7 @@ module github.com/na4ma4/ghtool
 go 1.20
 
 require (
-	github.com/google/go-github/v53 v53.0.0
+	github.com/google/go-github/v53 v53.2.0
 	github.com/na4ma4/config v1.0.1
 	github.com/na4ma4/go-timestring v0.3.0
 	github.com/sirupsen/logrus v1.9.3
