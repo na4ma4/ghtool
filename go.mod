@@ -11,7 +11,7 @@ require (
 	github.com/spf13/viper v1.16.0
 	golang.org/x/oauth2 v0.9.0
 	golang.org/x/text v0.10.0
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
