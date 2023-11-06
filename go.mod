@@ -7,7 +7,7 @@ require (
 	github.com/na4ma4/config v1.0.1
 	github.com/na4ma4/go-timestring v0.3.0
 	github.com/sirupsen/logrus v1.9.3
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.17.0
 	golang.org/x/oauth2 v0.13.0
 	golang.org/x/text v0.14.0
