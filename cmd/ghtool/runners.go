@@ -39,12 +39,12 @@ func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerCha
 		}
 	}
 
+	defer func() { _ = twOut.Flush() }()
+
 	for in := range runnerChan {
 		if err := tmpl.Execute(twOut, in); err != nil {
 			log.Printf("error displaying host: %s", err.Error())
 		}
-
-		_ = twOut.Flush()
 	}
 }
 
