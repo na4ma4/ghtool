@@ -1,6 +1,8 @@
 module github.com/na4ma4/ghtool
 
-go 1.20
+go 1.22.0
+
+toolchain go1.22.3
 
 require (
 	github.com/google/go-github/v53 v53.2.0

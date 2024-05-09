@@ -13,7 +13,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-//nolint:gochecknoglobals // cobra uses globals in main
 var cmdRunnersList = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
@@ -22,7 +21,6 @@ var cmdRunnersList = &cobra.Command{
 	Args:    cobra.NoArgs,
 }
 
-//nolint:gochecknoinits // init is used in main for cobra
 func init() {
 	cmdRunners.AddCommand(cmdRunnersList)
 

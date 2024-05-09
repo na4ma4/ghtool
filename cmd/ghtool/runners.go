@@ -11,14 +11,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-//nolint:gochecknoglobals // cobra uses globals in main
 var cmdRunners = &cobra.Command{
 	Use:     "runner",
 	Aliases: []string{"runners", "r"},
 	Short:   "Runner Commands",
 }
 
-//nolint:gochecknoinits // init is used in main for cobra
 func init() {
 	rootCmd.AddCommand(cmdRunners)
 }

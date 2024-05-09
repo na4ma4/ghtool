@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strconv"
 	"strings"
 	"text/template"
 	"time"
@@ -59,15 +60,15 @@ func padToMaxLength(source interface{}) string {
 	case *string:
 		return padToLength(*val, 0)
 	case *int:
-		return padToLength(fmt.Sprintf("%d", *val), 0)
+		return padToLength(strconv.Itoa(*val), 0)
 	case *int8:
-		return padToLength(fmt.Sprintf("%d", *val), 0)
+		return padToLength(strconv.Itoa(int(*val)), 0)
 	case *int16:
-		return padToLength(fmt.Sprintf("%d", *val), 0)
+		return padToLength(strconv.Itoa(int(*val)), 0)
 	case *int32:
-		return padToLength(fmt.Sprintf("%d", *val), 0)
+		return padToLength(strconv.Itoa(int(*val)), 0)
 	case *int64:
-		return padToLength(fmt.Sprintf("%d", *val), 0)
+		return padToLength(strconv.Itoa(int(*val)), 0)
 	default:
 		return padToLength(source, 0)
 	}
@@ -79,15 +80,15 @@ func padToLength(source interface{}, prefix int) string {
 	case *string:
 		return padToLength(*val, prefix)
 	case *int:
-		return padToLength(fmt.Sprintf("%d", *val), prefix)
+		return padToLength(strconv.Itoa(*val), prefix)
 	case *int8:
-		return padToLength(fmt.Sprintf("%d", *val), prefix)
+		return padToLength(strconv.Itoa(int(*val)), prefix)
 	case *int16:
-		return padToLength(fmt.Sprintf("%d", *val), prefix)
+		return padToLength(strconv.Itoa(int(*val)), prefix)
 	case *int32:
-		return padToLength(fmt.Sprintf("%d", *val), prefix)
+		return padToLength(strconv.Itoa(int(*val)), prefix)
 	case *int64:
-		return padToLength(fmt.Sprintf("%d", *val), prefix)
+		return padToLength(strconv.Itoa(int(*val)), prefix)
 	default:
 		return fmt.Sprintf(fmt.Sprintf("%%-%ds", prefix), source)
 	}

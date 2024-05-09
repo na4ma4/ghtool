@@ -13,7 +13,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-//nolint:gochecknoglobals // cobra uses globals in main
 var cmdRunnersWatch = &cobra.Command{
 	Use:     "watch",
 	Aliases: []string{"w"},
@@ -26,7 +25,6 @@ const (
 	defaultTickPeriod = 30 * time.Second
 )
 
-//nolint:gochecknoinits // init is used in main for cobra
 func init() {
 	cmdRunners.AddCommand(cmdRunnersWatch)
 

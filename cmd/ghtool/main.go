@@ -15,12 +15,10 @@ import (
 	"golang.org/x/oauth2"
 )
 
-//nolint:gochecknoglobals // cobra uses globals in main
 var rootCmd = &cobra.Command{
 	Use: "ghtool",
 }
 
-//nolint:gochecknoinits // init is used in main for cobra
 func init() {
 	cobra.OnInitialize(mainconfig.ConfigInit)
 
