@@ -1,7 +1,7 @@
 package runnerlist
 
 import (
-	"github.com/google/go-github/v53/github"
+	"github.com/google/go-github/v63/github"
 )
 
 type Runners struct {

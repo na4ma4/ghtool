@@ -1,11 +1,11 @@
-package main
+package runners
 
 import (
 	"context"
 	"text/template"
 	"time"
 
-	"github.com/google/go-github/v53/github"
+	"github.com/google/go-github/v63/github"
 	"github.com/na4ma4/config"
 	"github.com/na4ma4/ghtool/internal/runnerlist"
 	"github.com/sirupsen/logrus"
@@ -26,8 +26,6 @@ const (
 )
 
 func init() {
-	cmdRunners.AddCommand(cmdRunnersWatch)
-
 	cmdRunnersWatch.PersistentFlags().StringP("format", "f",
 		"[{{padlen .ID 5}}] {{padlen .Name 25}} Status:{{.Status}}\tBusy:{{tf .Busy}}\t(Labels:{{labels .Labels}})",
 		"Output format (go template)",
@@ -87,7 +85,7 @@ func fetchEnterpriseRunners(
 	enterprise string,
 	runnerList *runnerlist.Runners,
 ) {
-	opts := &github.ListOptions{}
+	opts := &github.ListRunnersOptions{}
 
 	for {
 		runners, resp, err := client.Enterprise.ListRunners(ctx, enterprise, opts)

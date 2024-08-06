@@ -1,4 +1,4 @@
-package main
+package mainconfig
 
 import (
 	"bytes"
@@ -15,8 +15,8 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-// basicFunctions are the set of initial functions provided to every template.
-func basicFunctions(extra ...template.FuncMap) template.FuncMap {
+// BasicFunctions are the set of initial functions provided to every template.
+func BasicFunctions(extra ...template.FuncMap) template.FuncMap {
 	basicFuncMap := template.FuncMap{
 		"json": func(v interface{}) string {
 			buf := &bytes.Buffer{}

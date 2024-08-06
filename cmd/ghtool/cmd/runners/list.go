@@ -1,4 +1,4 @@
-package main
+package runners
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v53/github"
+	"github.com/google/go-github/v63/github"
 	"github.com/na4ma4/config"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -22,8 +22,6 @@ var cmdRunnersList = &cobra.Command{
 }
 
 func init() {
-	cmdRunners.AddCommand(cmdRunnersList)
-
 	cmdRunnersList.PersistentFlags().StringP("format", "f",
 		"{{.ID}}\t{{.Name}}\t{{.OS}}\t{{.Status}}\t{{tf .Busy}}\t{{labels .Labels}}",
 		"Output format (go template)",
@@ -77,7 +75,7 @@ func listEnterpriseRunners(ctx context.Context, client *github.Client, enterpris
 	go func() {
 		defer close(runnerChan)
 
-		opts := &github.ListOptions{}
+		opts := &github.ListRunnersOptions{}
 
 		for {
 			runners, resp, err := client.Enterprise.ListRunners(ctx, enterprise, opts)
