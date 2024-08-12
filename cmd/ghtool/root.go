@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/dosquad/go-cliversion"
 	"github.com/na4ma4/ghtool/cmd/ghtool/cmd/runners"
+	"github.com/na4ma4/ghtool/internal/mainconfig"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -23,6 +24,8 @@ func Help() error {
 
 func init() {
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
+
+	cobra.OnInitialize(mainconfig.ConfigInit)
 
 	_ = rootCmd.PersistentFlags().BoolP("debug", "d", false, "Debug output")
 	_ = viper.BindPFlag("debug", rootCmd.PersistentFlags().Lookup("debug"))

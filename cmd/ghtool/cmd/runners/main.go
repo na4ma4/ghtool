@@ -18,9 +18,9 @@ import (
 )
 
 var CmdRunners = &cobra.Command{
-	Use:   "smtp",
-	Short: "SMTP Test Commands",
-	Long:  "Commands use for testing of SMTP Servers",
+	Use:     "runner",
+	Aliases: []string{"runners", "r"},
+	Short:   "Runner Commands",
 }
 
 func init() {
@@ -106,9 +106,36 @@ func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerCha
 }
 
 func simplePrintRunnerList(tmpl *template.Template, runnerChan chan *github.Runner) {
+	state := map[int64]*github.Runner{}
 	for in := range runnerChan {
+		state[in.GetID()] = in
+		if v := statePrefix(state); v != "" {
+			fmt.Fprint(os.Stdout, v)
+		}
 		if err := tmpl.Execute(os.Stdout, in); err != nil {
 			log.Printf("error displaying host: %s", err.Error())
 		}
 	}
+}
+
+func statePrefix(state map[int64]*github.Runner) string {
+	total, online, offline, busy := 0, 0, 0, 0
+	for idx := range state {
+		switch state[idx].GetStatus() {
+		case "online":
+			online++
+		case "offline":
+			offline++
+		case "shutdown":
+			delete(state, idx)
+			continue
+		}
+		if state[idx].GetBusy() {
+			busy++
+		}
+
+		total++
+	}
+
+	return fmt.Sprintf("[Onl:%02d Ofl:%02d Busy:%02d T:%02d] ", online, offline, busy, total)
 }

@@ -95,10 +95,14 @@ func fetchEnterpriseRunners(
 			return
 		}
 
+		runnerList.FreshnessReset()
+
 		for _, runner := range runners.Runners {
 			// logrus.Debugf("Sending Runner to Channel: %d", runner.GetID())
 			_ = runnerList.Add(runner)
 		}
+
+		runnerList.PushUnfresh()
 
 		if opts.Page = resp.NextPage; resp.NextPage == 0 {
 			return
