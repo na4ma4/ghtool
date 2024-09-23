@@ -3,7 +3,7 @@ module github.com/na4ma4/ghtool
 go 1.22.2
 
 require (
-	github.com/dosquad/go-cliversion v0.1.6
+	github.com/dosquad/go-cliversion v0.1.9
 	github.com/google/go-github/v64 v64.0.0
 	github.com/na4ma4/config v1.0.2
 	github.com/na4ma4/go-timestring v0.3.0
