@@ -3,7 +3,7 @@ module github.com/na4ma4/ghtool
 go 1.22.2
 
 require (
-	github.com/dosquad/go-cliversion v0.1.9
+	github.com/dosquad/go-cliversion v0.2.1
 	github.com/google/go-github/v64 v64.0.0
 	github.com/na4ma4/config v1.0.2
 	github.com/na4ma4/go-timestring v0.3.0
@@ -12,7 +12,7 @@ require (
 	github.com/spf13/viper v1.19.0
 	golang.org/x/oauth2 v0.24.0
 	golang.org/x/text v0.21.0
-	google.golang.org/protobuf v1.35.2
+	google.golang.org/protobuf v1.36.0
 )
 
 require (
