@@ -1,6 +1,7 @@
 module github.com/na4ma4/ghtool
 
 go 1.22.2
+toolchain go1.23.6
 
 require (
 	github.com/dosquad/go-cliversion v0.2.1
@@ -10,7 +11,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.19.0
-	golang.org/x/oauth2 v0.26.0
+	golang.org/x/oauth2 v0.27.0
 	golang.org/x/text v0.22.0
 	google.golang.org/protobuf v1.36.5
 )
