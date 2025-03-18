@@ -69,7 +69,7 @@ nfpms:
     id: ghtool
     package_name: ghtool
     file_name_template: "ghtool_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
-    builds:
+    ids:
       - ghtool
     homepage: https://github.com/na4ma4/ghtool
     maintainer: na4ma4 <na4ma4@users.noreply.github.com>
