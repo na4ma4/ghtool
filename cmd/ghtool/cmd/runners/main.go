@@ -10,7 +10,7 @@ import (
 	"text/tabwriter"
 	"text/template"
 
-	"github.com/google/go-github/v64/github"
+	"github.com/google/go-github/v70/github"
 	"github.com/na4ma4/config"
 	"github.com/na4ma4/ghtool/internal/mainconfig"
 	"github.com/spf13/cobra"

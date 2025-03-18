@@ -3,7 +3,7 @@ package runnerlist
 import (
 	"sync"
 
-	"github.com/google/go-github/v64/github"
+	"github.com/google/go-github/v70/github"
 )
 
 type Runners struct {
