@@ -5,7 +5,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/google/go-github/v70/github"
+	"github.com/google/go-github/v72/github"
 	"github.com/na4ma4/config"
 	"github.com/na4ma4/ghtool/internal/runnerlist"
 	"github.com/sirupsen/logrus"

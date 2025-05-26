@@ -10,7 +10,7 @@ import (
 	"text/tabwriter"
 	"text/template"
 
-	"github.com/google/go-github/v70/github"
+	"github.com/google/go-github/v72/github"
 	"github.com/na4ma4/config"
 	"github.com/na4ma4/ghtool/internal/mainconfig"
 	"github.com/spf13/cobra"
@@ -80,10 +80,16 @@ func getTemplateFromConfig(format string, extraFunc ...template.FuncMap) (*templ
 	return tmpl, nil
 }
 
-func printRunnerList(tmpl *template.Template, forceDisableHeader bool, runnerChan chan *github.Runner) {
+func printRunnerList(
+	tmpl *template.Template,
+	forceDisableHeader bool,
+	runnerChan chan *github.Runner,
+) {
 	twOut := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0) //nolint:gomnd // standard terminal output
 
-	if !strings.Contains(tmpl.Root.String(), "json") && strings.Contains(tmpl.Root.String(), "\t") && !forceDisableHeader {
+	if !strings.Contains(tmpl.Root.String(), "json") &&
+		strings.Contains(tmpl.Root.String(), "\t") &&
+		!forceDisableHeader {
 		if err := tmpl.Execute(twOut, map[string]interface{}{
 			"ID":     "ID",
 			"Name":   "Name",

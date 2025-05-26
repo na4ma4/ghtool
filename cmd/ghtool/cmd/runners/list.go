@@ -6,7 +6,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/google/go-github/v70/github"
+	"github.com/google/go-github/v72/github"
 	"github.com/na4ma4/config"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
