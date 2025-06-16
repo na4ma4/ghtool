@@ -1,11 +1,9 @@
 module github.com/na4ma4/ghtool
 
-go 1.23.4
-
-toolchain go1.24.0
+go 1.24.1
 
 require (
-	github.com/dosquad/go-cliversion v0.2.1
+	github.com/dosquad/go-cliversion v0.3.0
 	github.com/google/go-github/v72 v72.0.0
 	github.com/na4ma4/config v1.0.4
 	github.com/na4ma4/go-timestring v0.3.0
