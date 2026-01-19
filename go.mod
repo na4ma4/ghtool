@@ -9,7 +9,7 @@ require (
 	github.com/google/go-github/v72 v72.0.0
 	github.com/na4ma4/config v1.0.5
 	github.com/na4ma4/go-timestring v0.4.0
-	github.com/sirupsen/logrus v1.9.3
+	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 	golang.org/x/oauth2 v0.34.0
